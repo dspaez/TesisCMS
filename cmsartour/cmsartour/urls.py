@@ -19,10 +19,13 @@ from django.conf.urls import url, include
 from artourquito.api import MonumentosQuitoResource
 from tastypie.api import Api
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 v1_api = Api(api_name='v1')
 v1_api.register(MonumentosQuitoResource())
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api/', include(v1_api.urls)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
